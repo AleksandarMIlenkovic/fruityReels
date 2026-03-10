@@ -27,22 +27,23 @@ export class Game {
   }
 
   private async loadAssets(): Promise<void> {
+    const base: string = import.meta.env.BASE_URL;
     Assets.addBundle("game", {
-      Cherry: "/assets/Cherry.png",
-      Seven: "/assets/Seven.png",
-      Bar: "/assets/Bar.png",
-      Bell: "/assets/Bell.png",
-      Diamond: "/assets/Diamond.png",
-      Lemon: "/assets/Lemon.png",
-      Plum: "/assets/Plum.png",
-      Wild: "/assets/Wild.png",
-      ReelFrame: "/assets/ReelFrame.png",
-      ReelSeperator: "/assets/ReelSeperator.png",
-      SpinButton: "/assets/SpinButton.png",
-      WinField: "/assets/WinField.png",
-      BetField: "/assets/BetField.png",
+      Cherry: `${base}assets/Cherry.png`,
+      Seven: `${base}assets/Seven.png`,
+      Bar: `${base}assets/Bar.png`,
+      Bell: `${base}assets/Bell.png`,
+      Diamond: `${base}assets/Diamond.png`,
+      Lemon: `${base}assets/Lemon.png`,
+      Plum: `${base}assets/Plum.png`,
+      Wild: `${base}assets/Wild.png`,
+      ReelFrame: `${base}assets/ReelFrame.png`,
+      ReelSeperator: `${base}assets/ReelSeperator.png`,
+      SpinButton: `${base}assets/SpinButton.png`,
+      WinField: `${base}assets/WinField.png`,
+      BetField: `${base}assets/BetField.png`,
       font: {
-        src: "/assets/PixelifySans-Bold.ttf",
+        src: `${base}assets/PixelifySans-Bold.ttf`,
         data: { family: "PixelifySans-Bold" },
       },
     });
