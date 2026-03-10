@@ -1,0 +1,58 @@
+[
+  {
+    "name": "3 Wilds — all rows",
+    "grid": [
+      ["Wild", "Wild", "Wild"],
+      ["Wild", "Wild", "Wild"],
+      ["Wild", "Wild", "Wild"]
+    ]
+  },
+  {
+    "name": "Top row — Cherry",
+    "grid": [
+      ["Cherry", "Lemon", "Bar"],
+      ["Cherry", "Bell", "Diamond"],
+      ["Cherry", "Seven", "Plum"]
+    ]
+  },
+  {
+    "name": "Center row — Seven",
+    "grid": [
+      ["Bar", "Seven", "Lemon"],
+      ["Plum", "Seven", "Cherry"],
+      ["Bell", "Seven", "Diamond"]
+    ]
+  },
+  {
+    "name": "Bottom row — Bell",
+    "grid": [
+      ["Cherry", "Lemon", "Bell"],
+      ["Seven", "Bar", "Bell"],
+      ["Diamond", "Plum", "Bell"]
+    ]
+  },
+  {
+    "name": "Diagonal ↘ — Bar",
+    "grid": [
+      ["Bar", "Lemon", "Cherry"],
+      ["Seven", "Bar", "Diamond"],
+      ["Plum", "Bell", "Bar"]
+    ]
+  },
+  {
+    "name": "Diagonal ↙ — Diamond",
+    "grid": [
+      ["Cherry", "Lemon", "Diamond"],
+      ["Seven", "Diamond", "Bar"],
+      ["Diamond", "Bell", "Plum"]
+    ]
+  },
+  {
+    "name": "Wild helps top row",
+    "grid": [
+      ["Cherry", "Lemon", "Bar"],
+      ["Wild", "Cherry", "Diamond"],
+      ["Cherry", "Seven", "Plum"]
+    ]
+  }
+]
