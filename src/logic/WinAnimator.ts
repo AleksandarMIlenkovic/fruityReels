@@ -1,10 +1,8 @@
 import { Application, Container } from "pixi.js";
 import { Reel } from "../components/Reel";
 import { WinLine } from "./WinEvaluator";
-import { WinDisplay } from "../ui/WinDisplay";
-
-const PULSE_FREQUENCY: number = 5;    // oscillations per second
-const PULSE_AMPLITUDE: number = 0.1;  // scale added on top of 1.0
+const PULSE_FREQUENCY: number = 5; // oscillations per second
+const PULSE_AMPLITUDE: number = 0.1; // scale added on top of 1.0
 const ALL_LINES_DURATION_MS: number = 2000;
 const PER_LINE_DURATION_MS: number = 1500;
 
@@ -13,7 +11,6 @@ type Phase = "all-lines" | "line-cycle";
 export class WinAnimator {
   private readonly app: Application;
   private readonly reels: Reel[];
-  private readonly winDisplay: WinDisplay;
 
   private winLines: WinLine[] = [];
   private phase: Phase = "all-lines";
@@ -21,10 +18,9 @@ export class WinAnimator {
   private currentLineIndex: number = 0;
   private running: boolean = false;
 
-  constructor(app: Application, reels: Reel[], winDisplay: WinDisplay) {
+  constructor(app: Application, reels: Reel[]) {
     this.app = app;
     this.reels = reels;
-    this.winDisplay = winDisplay;
   }
 
   public start(winLines: WinLine[]): void {
@@ -73,13 +69,16 @@ export class WinAnimator {
   private tickLineCycle(): void {
     if (this.elapsedMs >= PER_LINE_DURATION_MS) {
       this.resetAllSymbols();
-      this.currentLineIndex = (this.currentLineIndex + 1) % this.winLines.length;
+      this.currentLineIndex =
+        (this.currentLineIndex + 1) % this.winLines.length;
       this.elapsedMs = 0;
       return;
     }
 
     const scale: number = this.pulseScale(this.elapsedMs);
-    const symbols: Container[] = this.collectLineSymbols(this.winLines[this.currentLineIndex]);
+    const symbols: Container[] = this.collectLineSymbols(
+      this.winLines[this.currentLineIndex],
+    );
     for (let i: number = 0; i < symbols.length; i++) {
       symbols[i].scale.set(scale);
     }
@@ -87,7 +86,9 @@ export class WinAnimator {
 
   private pulseScale(elapsedMs: number): number {
     const elapsedSeconds: number = elapsedMs / 1000;
-    return 1 + PULSE_AMPLITUDE * Math.abs(Math.sin(elapsedSeconds * PULSE_FREQUENCY));
+    return (
+      1 + PULSE_AMPLITUDE * Math.abs(Math.sin(elapsedSeconds * PULSE_FREQUENCY))
+    );
   }
 
   private collectAllWinningSymbols(): Container[] {
@@ -95,7 +96,8 @@ export class WinAnimator {
     const symbols: Container[] = [];
 
     for (let i: number = 0; i < this.winLines.length; i++) {
-      const positions: [reel: number, row: number][] = this.winLines[i].positions;
+      const positions: [reel: number, row: number][] =
+        this.winLines[i].positions;
       for (let j: number = 0; j < positions.length; j++) {
         const reel: number = positions[j][0];
         const row: number = positions[j][1];

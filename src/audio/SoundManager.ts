@@ -1,8 +1,8 @@
 const SOUND_FILES = {
-  button:     "/assets/sounds/button.wav",
-  spin:       "/assets/sounds/spin_sound.wav",
-  win:        "/assets/sounds/win_sound.wav",
-  lose:       "/assets/sounds/Loose.wav",
+  button: "/assets/sounds/button.wav",
+  spin: "/assets/sounds/spin_sound.wav",
+  win: "/assets/sounds/win_sound.wav",
+  lose: "/assets/sounds/Loose.wav",
   background: "/assets/sounds/Background.wav",
 } as const;
 
@@ -33,7 +33,8 @@ export class SoundManager {
     for (const name of names) {
       const response: Response = await fetch(SOUND_FILES[name]);
       const arrayBuffer: ArrayBuffer = await response.arrayBuffer();
-      const audioBuffer: AudioBuffer = await this.context.decodeAudioData(arrayBuffer);
+      const audioBuffer: AudioBuffer =
+        await this.context.decodeAudioData(arrayBuffer);
       this.buffers.set(name, audioBuffer);
     }
   }

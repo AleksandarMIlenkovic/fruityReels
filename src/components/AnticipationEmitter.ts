@@ -97,7 +97,7 @@ export class AnticipationEmitter extends Container {
     const spread: number = (Math.random() - 0.5) * SPREAD_FACTOR;
 
     // Shoot inward (negate the outward normal) with slight perpendicular spread
-    const vx: number = -nx * speed + (-ny) * spread;
+    const vx: number = -nx * speed + -ny * spread;
     const vy: number = -ny * speed + nx * spread;
 
     return {
@@ -112,7 +112,12 @@ export class AnticipationEmitter extends Container {
     };
   }
 
-  private randomBorderPoint(): { x: number; y: number; nx: number; ny: number } {
+  private randomBorderPoint(): {
+    x: number;
+    y: number;
+    nx: number;
+    ny: number;
+  } {
     const w: number = SYMBOL_SIZE;
     const h: number = REEL_HEIGHT;
     const perimeter: number = 2 * (w + h);

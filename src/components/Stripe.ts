@@ -1,4 +1,9 @@
-import { SYMBOL_SIZE, SYMBOLS_PER_STRIPE, ROWS, SymbolName } from "../constants";
+import {
+  SYMBOL_SIZE,
+  SYMBOLS_PER_STRIPE,
+  ROWS,
+  SymbolName,
+} from "../constants";
 import { Symbol } from "./Symbol";
 
 export interface VisibleCell {
@@ -49,7 +54,9 @@ export class Stripe {
 
     const topIndex: number = Math.floor(wrappedCursor / SYMBOL_SIZE);
     const offset: number = wrappedCursor % SYMBOL_SIZE;
-    const count: number = Math.ceil((ROWS * SYMBOL_SIZE + offset) / SYMBOL_SIZE);
+    const count: number = Math.ceil(
+      (ROWS * SYMBOL_SIZE + offset) / SYMBOL_SIZE,
+    );
 
     const layout: VisibleCell[] = [];
     for (let i: number = 0; i < count; i++) {
@@ -77,17 +84,23 @@ export class Stripe {
    * reaches targetCursor. Fills all other cells with random symbols.
    * targetCursor must be a multiple of SYMBOL_SIZE.
    */
-  public placeStopSymbols(targetCursor: number, stopSymbols: SymbolName[]): void {
+  public placeStopSymbols(
+    targetCursor: number,
+    stopSymbols: SymbolName[],
+  ): void {
     // Use positive modulo — targetCursor may be negative when the cursor has been decreasing.
-    const rawIndex: number = Math.floor(targetCursor / SYMBOL_SIZE) % SYMBOLS_PER_STRIPE;
-    const topIndex: number = (rawIndex + SYMBOLS_PER_STRIPE) % SYMBOLS_PER_STRIPE;
+    const rawIndex: number =
+      Math.floor(targetCursor / SYMBOL_SIZE) % SYMBOLS_PER_STRIPE;
+    const topIndex: number =
+      (rawIndex + SYMBOLS_PER_STRIPE) % SYMBOLS_PER_STRIPE;
 
     for (let row: number = 0; row < stopSymbols.length; row++) {
       this.cells[(topIndex + row) % SYMBOLS_PER_STRIPE] = stopSymbols[row];
     }
 
     for (let i: number = 0; i < SYMBOLS_PER_STRIPE; i++) {
-      const distanceFromTop: number = (i - topIndex + SYMBOLS_PER_STRIPE) % SYMBOLS_PER_STRIPE;
+      const distanceFromTop: number =
+        (i - topIndex + SYMBOLS_PER_STRIPE) % SYMBOLS_PER_STRIPE;
       if (distanceFromTop >= stopSymbols.length) {
         this.cells[i] = Symbol.randomName();
       }

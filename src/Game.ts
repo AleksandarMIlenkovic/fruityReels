@@ -41,7 +41,10 @@ export class Game {
       SpinButton: "/assets/SpinButton.png",
       WinField: "/assets/WinField.png",
       BetField: "/assets/BetField.png",
-      font: { src: "/assets/PixelifySans-Bold.ttf", data: { family: "PixelifySans-Bold" } },
+      font: {
+        src: "/assets/PixelifySans-Bold.ttf",
+        data: { family: "PixelifySans-Bold" },
+      },
     });
     await Assets.loadBundle("game");
   }

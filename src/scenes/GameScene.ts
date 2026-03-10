@@ -102,11 +102,7 @@ export class GameScene extends Scene {
     await this.soundManager.load();
     this.soundManager.playBackground();
 
-    this.winAnimator = new WinAnimator(
-      this.app,
-      this.reels.getReels(),
-      this.winDisplay,
-    );
+    this.winAnimator = new WinAnimator(this.app, this.reels.getReels());
 
     this.sparkleEmitter = new SparkleEmitter(
       this.app,

@@ -20,11 +20,46 @@ interface LineDef {
 }
 
 const LINE_DEFINITIONS: LineDef[] = [
-  { name: "Top Row",      positions: [[0, 0], [1, 0], [2, 0]] },
-  { name: "Center Row",   positions: [[0, 1], [1, 1], [2, 1]] },
-  { name: "Bottom Row",   positions: [[0, 2], [1, 2], [2, 2]] },
-  { name: "Diagonal ↘",  positions: [[0, 0], [1, 1], [2, 2]] },
-  { name: "Diagonal ↙",  positions: [[0, 2], [1, 1], [2, 0]] },
+  {
+    name: "Top Row",
+    positions: [
+      [0, 0],
+      [1, 0],
+      [2, 0],
+    ],
+  },
+  {
+    name: "Center Row",
+    positions: [
+      [0, 1],
+      [1, 1],
+      [2, 1],
+    ],
+  },
+  {
+    name: "Bottom Row",
+    positions: [
+      [0, 2],
+      [1, 2],
+      [2, 2],
+    ],
+  },
+  {
+    name: "Diagonal ↘",
+    positions: [
+      [0, 0],
+      [1, 1],
+      [2, 2],
+    ],
+  },
+  {
+    name: "Diagonal ↙",
+    positions: [
+      [0, 2],
+      [1, 1],
+      [2, 0],
+    ],
+  },
 ];
 
 export class WinEvaluator {
@@ -33,7 +68,10 @@ export class WinEvaluator {
    * on any win line — meaning a win is still possible on those reels.
    * Used to trigger anticipation on the next reel.
    */
-  public static hasPartialWin(results: SymbolName[][], stoppedCount: number): boolean {
+  public static hasPartialWin(
+    results: SymbolName[][],
+    stoppedCount: number,
+  ): boolean {
     for (const def of LINE_DEFINITIONS) {
       const symbols: SymbolName[] = [];
 
@@ -87,7 +125,9 @@ export class WinEvaluator {
     let total: number = 0;
 
     for (let i: number = 0; i < winLines.length; i++) {
-      const nonWilds: SymbolName[] = winLines[i].symbols.filter((s: SymbolName): boolean => s !== "Wild");
+      const nonWilds: SymbolName[] = winLines[i].symbols.filter(
+        (s: SymbolName): boolean => s !== "Wild",
+      );
       const symbol: SymbolName = nonWilds.length > 0 ? nonWilds[0] : "Wild";
       total += SYMBOL_VALUES[symbol] * bet;
     }

@@ -11,7 +11,8 @@ import { Reel } from "./Reel";
 import { ReelFrame } from "./ReelFrame";
 import { WinEvaluator } from "../logic/WinEvaluator";
 
-const REELS_WIDTH: number = REEL_COUNT * SYMBOL_SIZE + (REEL_COUNT - 1) * REEL_SPACING;
+const REELS_WIDTH: number =
+  REEL_COUNT * SYMBOL_SIZE + (REEL_COUNT - 1) * REEL_SPACING;
 const REELS_HEIGHT: number = ROWS * SYMBOL_SIZE;
 
 const ANTICIPATION_EXTRA_DELAY_MS: number = 1200;

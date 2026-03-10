@@ -111,7 +111,7 @@ export class SparkleEmitter extends Container {
     const spread: number = (Math.random() - 0.5) * 2;
 
     // Outward velocity along the normal, with perpendicular spread
-    const vx: number = nx * speed + (-ny) * spread;
+    const vx: number = nx * speed + -ny * spread;
     const vy: number = ny * speed + nx * spread;
 
     return {
@@ -126,7 +126,12 @@ export class SparkleEmitter extends Container {
     };
   }
 
-  private randomBorderPoint(): { x: number; y: number; nx: number; ny: number } {
+  private randomBorderPoint(): {
+    x: number;
+    y: number;
+    nx: number;
+    ny: number;
+  } {
     const width: number = this.frameRight - this.frameLeft;
     const height: number = this.frameBottom - this.frameTop;
     const perimeter: number = 2 * (width + height);
@@ -139,15 +144,30 @@ export class SparkleEmitter extends Container {
 
     if (t < width + height) {
       // Right edge — shoots right
-      return { x: this.frameRight, y: this.frameTop + (t - width), nx: 1, ny: 0 };
+      return {
+        x: this.frameRight,
+        y: this.frameTop + (t - width),
+        nx: 1,
+        ny: 0,
+      };
     }
 
     if (t < 2 * width + height) {
       // Bottom edge — shoots downward
-      return { x: this.frameRight - (t - width - height), y: this.frameBottom, nx: 0, ny: 1 };
+      return {
+        x: this.frameRight - (t - width - height),
+        y: this.frameBottom,
+        nx: 0,
+        ny: 1,
+      };
     }
 
     // Left edge — shoots left
-    return { x: this.frameLeft, y: this.frameBottom - (t - 2 * width - height), nx: -1, ny: 0 };
+    return {
+      x: this.frameLeft,
+      y: this.frameBottom - (t - 2 * width - height),
+      nx: -1,
+      ny: 0,
+    };
   }
 }

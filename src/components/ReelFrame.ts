@@ -8,7 +8,8 @@ export class ReelFrame extends Container {
   constructor() {
     super();
 
-    const totalWidth: number = REEL_COUNT * SYMBOL_SIZE + (REEL_COUNT - 1) * REEL_SPACING;
+    const totalWidth: number =
+      REEL_COUNT * SYMBOL_SIZE + (REEL_COUNT - 1) * REEL_SPACING;
     const totalHeight: number = ROWS * SYMBOL_SIZE;
 
     const frame: Sprite = new Sprite(Texture.from("/assets/ReelFrame.png"));

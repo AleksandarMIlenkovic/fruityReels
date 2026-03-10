@@ -139,7 +139,9 @@ export class PaytableScene extends Container {
 
     button.eventMode = "static";
     button.cursor = "pointer";
-    button.on("pointerdown", (): void => { this.emit("close"); });
+    button.on("pointerdown", (): void => {
+      this.emit("close");
+    });
 
     return button;
   }

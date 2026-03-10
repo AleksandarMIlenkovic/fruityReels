@@ -20,7 +20,6 @@ const EASE_FACTOR: number = 0.15;
 const SYMBOL_Y_OFFSET: number = 10; // nudge symbols upward within the reel viewport
 const MASK_VERTICAL_TRIM: number = 20;
 
-
 export class Reel extends Container {
   private readonly app: Application;
   private readonly stripe: Stripe;
