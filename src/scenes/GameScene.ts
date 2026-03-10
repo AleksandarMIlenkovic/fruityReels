@@ -21,7 +21,7 @@ const REELS_X: number = 640;
 const REELS_Y: number = 360;
 
 const SPIN_BUTTON_X: number = 640;
-const SPIN_BUTTON_Y: number = 635;
+const SPIN_BUTTON_Y: number = 650;
 
 const BET_SELECTOR_X: number = 380;
 const BET_SELECTOR_Y: number = 635;
@@ -88,8 +88,7 @@ export class GameScene extends Scene {
     this.winDisplay = new WinDisplay();
     this.winDisplay.x = WIN_DISPLAY_X;
     this.winDisplay.y = WIN_DISPLAY_Y;
-    this.winDisplay.width = this.betSelector.width;
-    this.winDisplay.scale.y = this.winDisplay.scale.x;
+    this.winDisplay.scale.set(0.25, 0.25);
     this.gameContainer.addChild(this.winDisplay);
 
     this.paytableButton = new PaytableButton();
