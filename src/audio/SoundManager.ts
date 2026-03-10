@@ -1,9 +1,9 @@
 const SOUND_FILES = {
-  button: "/assets/sounds/button.wav",
-  spin: "/assets/sounds/spin_sound.wav",
-  win: "/assets/sounds/win_sound.wav",
-  lose: "/assets/sounds/Loose.wav",
-  background: "/assets/sounds/Background.wav",
+  button: "assets/sounds/button.wav",
+  spin: "assets/sounds/spin_sound.wav",
+  win: "assets/sounds/win_sound.wav",
+  lose: "assets/sounds/Loose.wav",
+  background: "assets/sounds/Background.wav",
 } as const;
 
 export type SoundName = keyof typeof SOUND_FILES;
@@ -28,10 +28,11 @@ export class SoundManager {
   }
 
   public async load(): Promise<void> {
+    const base: string = import.meta.env.BASE_URL;
     const names = Object.keys(SOUND_FILES) as SoundName[];
 
     for (const name of names) {
-      const response: Response = await fetch(SOUND_FILES[name]);
+      const response: Response = await fetch(`${base}${SOUND_FILES[name]}`);
       const arrayBuffer: ArrayBuffer = await response.arrayBuffer();
       const audioBuffer: AudioBuffer =
         await this.context.decodeAudioData(arrayBuffer);
