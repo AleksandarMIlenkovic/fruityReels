@@ -25,7 +25,9 @@ export class OutcomeSelector {
   }
 
   public async loadOutcomes(): Promise<void> {
-    const response: Response = await fetch(`${import.meta.env.BASE_URL}outcomes.json`);
+    const response: Response = await fetch(
+      `${import.meta.env.BASE_URL}outcomes.json`,
+    );
     this.outcomes = (await response.json()) as Outcome[];
     this.populate();
   }
