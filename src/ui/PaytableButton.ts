@@ -11,10 +11,10 @@ export class PaytableButton extends Container {
     this.addChild(bg);
 
     const label: Text = new Text({
-      text: "!",
+      text: "i",
       style: {
         fontFamily: "PixelifySans-Bold",
-        fontSize: 16,
+        fontSize: 30,
         fill: 0xffd700,
       },
     });
