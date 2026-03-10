@@ -8,7 +8,7 @@ export class Symbol extends Container {
   constructor(name: SymbolName) {
     super();
     this._symbolName = name;
-    this.sprite = new Sprite(Texture.from(`/assets/${name}.png`));
+    this.sprite = new Sprite(Texture.from(name));
     this.sprite.width = SYMBOL_SIZE;
     this.sprite.height = SYMBOL_SIZE;
     this.pivot.set(SYMBOL_SIZE / 2, SYMBOL_SIZE / 2);
@@ -22,7 +22,7 @@ export class Symbol extends Container {
   public setSymbol(name: SymbolName): void {
     if (name === this._symbolName) return;
     this._symbolName = name;
-    this.sprite.texture = Texture.from(`/assets/${name}.png`);
+    this.sprite.texture = Texture.from(name);
   }
 
   public static randomName(): SymbolName {

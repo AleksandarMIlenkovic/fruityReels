@@ -10,7 +10,7 @@ export class WinField extends Container {
   constructor() {
     super();
 
-    this.bg = new Sprite(Texture.from("/assets/WinField.png"));
+    this.bg = new Sprite(Texture.from("WinField"));
     this.bg.anchor.set(0.5);
     this.addChild(this.bg);
 

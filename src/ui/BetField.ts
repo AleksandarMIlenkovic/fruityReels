@@ -10,7 +10,7 @@ export class BetField extends Container {
   constructor() {
     super();
 
-    this.bg = new Sprite(Texture.from("/assets/BetField.png"));
+    this.bg = new Sprite(Texture.from("BetField"));
     this.bg.anchor.set(0.5);
     this.bg.scale.set(0.5, 0.5);
     this.addChild(this.bg);

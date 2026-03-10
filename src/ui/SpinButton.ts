@@ -5,7 +5,7 @@ export class SpinButton extends Container {
 
   constructor() {
     super();
-    this.sprite = new Sprite(Texture.from("/assets/SpinButton.png"));
+    this.sprite = new Sprite(Texture.from("SpinButton"));
     this.sprite.anchor.set(0.5);
     this.addChild(this.sprite);
 

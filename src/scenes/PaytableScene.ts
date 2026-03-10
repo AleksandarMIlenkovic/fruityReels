@@ -77,7 +77,7 @@ export class PaytableScene extends Container {
     entry.x = x;
     entry.y = y;
 
-    const icon: Sprite = new Sprite(Texture.from(`/assets/${symbolName}.png`));
+    const icon: Sprite = new Sprite(Texture.from(symbolName));
     icon.width = ICON_SIZE;
     icon.height = ICON_SIZE;
     icon.y = (ROW_HEIGHT - ICON_SIZE) / 2;

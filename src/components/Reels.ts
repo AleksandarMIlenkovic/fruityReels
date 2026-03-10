@@ -43,9 +43,7 @@ export class Reels extends Container {
     }
 
     for (let i: number = 0; i < REEL_COUNT - 1; i++) {
-      const separator: Sprite = new Sprite(
-        Texture.from("/assets/ReelSeperator.png"),
-      );
+      const separator: Sprite = new Sprite(Texture.from("ReelSeperator"));
       separator.x = (i + 1) * (SYMBOL_SIZE + REEL_SPACING) - REEL_SPACING;
       separator.y = 0;
       separator.width = REEL_SPACING;

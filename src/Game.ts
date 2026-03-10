@@ -21,9 +21,11 @@ export class Game {
     this.app.stage.addChild(this.scene);
     await this.scene.init();
 
-    window.addEventListener("resize", (): void => {
+    const onResize = (): void => {
       this.scene.resize(this.app.screen.width, this.app.screen.height);
-    });
+    };
+    window.addEventListener("resize", onResize);
+    window.addEventListener("orientationchange", onResize);
   }
 
   private async loadAssets(): Promise<void> {
