@@ -2,10 +2,12 @@ import { Container, Sprite, Text, Texture } from "pixi.js";
 
 // Vertical offset from sprite center down into the lower dark panel
 const VALUE_Y_OFFSET: number = 28;
+const COUNT_UP_DURATION_MS: number = 800;
 
 export class WinField extends Container {
   private readonly bg: Sprite;
   private readonly valueText: Text;
+  private rafId: number = 0;
 
   constructor() {
     super();
@@ -29,6 +31,38 @@ export class WinField extends Container {
   }
 
   public setText(value: string): void {
+    this.cancelCountUp();
     this.valueText.text = value;
+  }
+
+  public countUp(target: number): void {
+    this.cancelCountUp();
+
+    if (target === 0) {
+      this.valueText.text = "0";
+      return;
+    }
+
+    const startTime: number = performance.now();
+
+    const tick = (now: number): void => {
+      const elapsed: number = now - startTime;
+      const progress: number = Math.min(elapsed / COUNT_UP_DURATION_MS, 1);
+      const eased: number = 1 - Math.pow(1 - progress, 3);
+      this.valueText.text = String(Math.floor(eased * target));
+
+      if (progress < 1) {
+        this.rafId = requestAnimationFrame(tick);
+      }
+    };
+
+    this.rafId = requestAnimationFrame(tick);
+  }
+
+  private cancelCountUp(): void {
+    if (this.rafId !== 0) {
+      cancelAnimationFrame(this.rafId);
+      this.rafId = 0;
+    }
   }
 }

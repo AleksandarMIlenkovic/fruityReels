@@ -12,7 +12,7 @@ export class WinDisplay extends Container {
   }
 
   public showAmount(amount: number): void {
-    this.field.setText(String(amount));
+    this.field.countUp(amount);
   }
 
   public showLoss(): void {

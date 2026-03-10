@@ -22,15 +22,7 @@ const COLUMN_WIDTH: number = PANEL_WIDTH / COLUMN_COUNT;
 export class PaytableScene extends Container {
   constructor() {
     super();
-    this.buildOverlay();
     this.buildPanel();
-  }
-
-  private buildOverlay(): void {
-    const overlay: Graphics = new Graphics()
-      .rect(0, 0, GAME_WIDTH, GAME_HEIGHT)
-      .fill({ color: 0x000000, alpha: 0.75 });
-    this.addChild(overlay);
   }
 
   private buildPanel(): void {
