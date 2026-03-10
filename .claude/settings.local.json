@@ -1,9 +1,0 @@
-{
-  "permissions": {
-    "allow": [
-      "Bash(cd \"C:/Users/pc/Desktop/gameArtAssignment/ga_slot_tech_assignment\" && npx tsc --noEmit 2>&1)",
-      "Bash(cd \"C:/Users/pc/Desktop/gameArtAssignment/ga_slot_tech_assignment\" && npx tsc --noEmit; echo \"EXIT:$?\")",
-      "Bash(cd \"C:/Users/pc/Desktop/gameArtAssignment/ga_slot_tech_assignment\" && npx tsc --noEmit 2>&1; echo \"EXIT:$?\")"
-    ]
-  }
-}
