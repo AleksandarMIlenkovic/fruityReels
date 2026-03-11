@@ -13,7 +13,7 @@ npm install
 npm run dev
 ```
 
-Open http://localhost:5173 in your browser.
+Open http://localhost:8080 in your browser.
 
 ### Build
 
@@ -27,7 +27,7 @@ Output goes to `dist/`. The build also runs Prettier and TypeScript checks — i
 
 ## How to Play
 
-- Click the **Spin** button or press **W** to spin
+- Click the **Spin** button or press **SPACE** to spin
 - Use the **< >** arrows to change your bet
 - Winning symbol combinations are highlighted with a pulse animation
 - The **Paytable** button (top right) shows payout values
