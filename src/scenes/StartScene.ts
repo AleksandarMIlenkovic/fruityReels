@@ -17,7 +17,7 @@ export class StartScene extends Scene {
 
     const title = new Text({
       text: "FRUITY REELS",
-      style: { fill: 0xffd700, fontSize: 64, fontFamily: "PixelifySans-Bold" },
+      style: { fill: 0xffd700, fontSize: 36, fontFamily: "PixelifySans-Bold" },
     });
     title.anchor.set(0.5);
     title.y = 0;

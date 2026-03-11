@@ -2,16 +2,16 @@ import { Container, Graphics, Sprite, Text, Texture } from "pixi.js";
 import { SYMBOLS, SymbolName, GAME_WIDTH, GAME_HEIGHT } from "../constants";
 import { SYMBOL_VALUES } from "../config/SymbolValues";
 
-const PANEL_WIDTH: number = 860;
-const PANEL_HEIGHT: number = 560;
+const PANEL_WIDTH: number = 740;
+const PANEL_HEIGHT: number = 480;
 const PANEL_X: number = (GAME_WIDTH - PANEL_WIDTH) / 2;
 const PANEL_Y: number = (GAME_HEIGHT - PANEL_HEIGHT) / 2;
 
-const ICON_SIZE: number = 64;
-const ROW_HEIGHT: number = 56;
+const ICON_SIZE: number = 48;
+const ROW_HEIGHT: number = 46;
 const COLUMN_COUNT: number = 2;
 const ROWS_PER_COLUMN: number = Math.ceil(SYMBOLS.length / COLUMN_COUNT);
-const GRID_TOP: number = 100;
+const GRID_TOP: number = 76;
 const COLUMN_WIDTH: number = PANEL_WIDTH / COLUMN_COUNT;
 
 /**
@@ -108,7 +108,7 @@ export class PaytableScene extends Container {
   private buildCloseButton(): Container {
     const button: Container = new Container();
     button.x = PANEL_WIDTH / 2 - 60;
-    button.y = PANEL_HEIGHT - 60;
+    button.y = PANEL_HEIGHT - 50;
 
     const bg: Graphics = new Graphics()
       .roundRect(0, 0, 120, 40, 8)
