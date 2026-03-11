@@ -1,9 +1,9 @@
 const SOUND_FILES = {
-  button: "assets/sounds/button.wav",
-  spin: "assets/sounds/spin_sound.wav",
-  win: "assets/sounds/win_sound.wav",
-  lose: "assets/sounds/Loose.wav",
-  background: "assets/sounds/Background.wav",
+  button: "assets/sounds/button.mp3",
+  spin: "assets/sounds/spin_sound.mp3",
+  win: "assets/sounds/win_sound.mp3",
+  lose: "assets/sounds/Loose.mp3",
+  background: "assets/sounds/Background.mp3",
 } as const;
 
 export type SoundName = keyof typeof SOUND_FILES;
