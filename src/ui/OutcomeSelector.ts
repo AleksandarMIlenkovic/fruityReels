@@ -58,7 +58,7 @@ export class OutcomeSelector {
   private populate(): void {
     const randomOption: HTMLOptionElement = document.createElement("option");
     randomOption.value = RANDOM_VALUE;
-    randomOption.text = "SELECT OUTCOME";
+    randomOption.text = RANDOM_VALUE;
     this.select.appendChild(randomOption);
 
     for (let i: number = 0; i < this.outcomes.length; i++) {

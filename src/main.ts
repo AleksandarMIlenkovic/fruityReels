@@ -1,3 +1,3 @@
 import { Game } from "./Game";
 
-new Game().start();
+new Game().start().catch(console.error);

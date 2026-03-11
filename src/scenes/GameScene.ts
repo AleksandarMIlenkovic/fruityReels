@@ -1,4 +1,4 @@
-import { Application, Container } from "pixi.js";
+import { Application, Container, Graphics } from "pixi.js";
 import { Scene } from "./Scene";
 import { Reels } from "../components/Reels";
 import { SpinController } from "../logic/SpinController";
@@ -42,22 +42,28 @@ const FRAME_BOTTOM: number = 555;
 
 export class GameScene extends Scene {
   private readonly app: Application;
+  private readonly soundManager: SoundManager;
   private readonly gameContainer: Container;
   private reels!: Reels;
   private spinController!: SpinController;
   private winAnimator!: WinAnimator;
   private sparkleEmitter!: SparkleEmitter;
-  private soundManager!: SoundManager;
   private spinButton!: SpinButton;
   private betSelector!: BetSelector;
   private paytableButton!: PaytableButton;
   private winDisplay!: WinDisplay;
   private outcomeSelector!: OutcomeSelector;
 
-  constructor(app: Application) {
+  constructor(app: Application, soundManager: SoundManager) {
     super();
     this.app = app;
+    this.soundManager = soundManager;
     this.gameContainer = new Container();
+
+    const mask = new Graphics().rect(0, 0, GAME_WIDTH, GAME_HEIGHT).fill(0xffffff);
+    this.gameContainer.addChild(mask);
+    this.gameContainer.mask = mask;
+
     this.addChild(this.gameContainer);
   }
 
@@ -97,8 +103,6 @@ export class GameScene extends Scene {
     this.paytableButton.on("paytable", (): void => this.openPaytable());
     this.gameContainer.addChild(this.paytableButton);
 
-    this.soundManager = new SoundManager();
-    await this.soundManager.load();
     this.soundManager.playBackground();
 
     this.winAnimator = new WinAnimator(this.app, this.reels.getReels());
@@ -123,9 +127,14 @@ export class GameScene extends Scene {
     this.spinController.on("spinEnd", (result: EvalResult): void => {
       this.spinButton.setEnabled(true);
       if (result.win) {
+        const bet: number = this.betSelector.getBet();
         const amount: number = WinEvaluator.calculateWinAmount(
           result.winLines,
-          this.betSelector.getBet(),
+          bet,
+        );
+        console.log(
+          `Win: ${result.winLines.length} lines, bet=${bet}, amount=${amount}`,
+          result.winLines.map((l) => l.name),
         );
         this.winDisplay.showAmount(amount);
         this.winAnimator.start(result.winLines);
@@ -138,32 +147,29 @@ export class GameScene extends Scene {
     });
 
     window.addEventListener("keydown", this.onKeyDown);
-
-    this.resize(this.app.screen.width, this.app.screen.height);
   }
 
   public resize(screenWidth: number, screenHeight: number): void {
-    if (!this.reels) return;
-
     const scale: number = Math.min(
       screenWidth / GAME_WIDTH,
       screenHeight / GAME_HEIGHT,
     );
 
-    const offsetX: number = (screenWidth - GAME_WIDTH * scale) / 2;
-    const offsetY: number = (screenHeight - GAME_HEIGHT * scale) / 2;
-
+    this.gameContainer.pivot.set(GAME_WIDTH / 2, GAME_HEIGHT / 2);
     this.gameContainer.scale.set(scale);
-    this.gameContainer.x = offsetX;
-    this.gameContainer.y = offsetY;
+    this.gameContainer.position.set(screenWidth / 2, screenHeight / 2);
 
-    this.outcomeSelector.setTransform(
-      OUTCOME_SELECTOR_X,
-      OUTCOME_SELECTOR_Y,
-      scale,
-      offsetX,
-      offsetY,
-    );
+    if (this.outcomeSelector) {
+      const offsetX: number = screenWidth / 2 - (GAME_WIDTH / 2) * scale;
+      const offsetY: number = screenHeight / 2 - (GAME_HEIGHT / 2) * scale;
+      this.outcomeSelector.setTransform(
+        OUTCOME_SELECTOR_X,
+        OUTCOME_SELECTOR_Y,
+        scale,
+        offsetX,
+        offsetY,
+      );
+    }
   }
 
   public override destroy(): void {

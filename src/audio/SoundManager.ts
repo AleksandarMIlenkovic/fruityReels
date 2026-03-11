@@ -11,70 +11,46 @@ export type SoundName = keyof typeof SOUND_FILES;
 const BACKGROUND_VOLUME: number = 0.3;
 const EFFECTS_VOLUME: number = 1.0;
 
-/**
- * SoundManager loads all sounds via the Web Audio API and provides
- * simple play / stop methods. The AudioContext is resumed on first
- * interaction automatically — no special setup needed at the call site.
- */
 export class SoundManager {
   private readonly context: AudioContext;
   private readonly buffers: Map<SoundName, AudioBuffer>;
-  private backgroundSource: AudioBufferSourceNode | null;
+  private backgroundSource: AudioBufferSourceNode | null = null;
 
   constructor() {
     this.context = new AudioContext();
     this.buffers = new Map();
-    this.backgroundSource = null;
   }
 
   public async load(): Promise<void> {
     const base: string = import.meta.env.BASE_URL;
     const names = Object.keys(SOUND_FILES) as SoundName[];
 
-    for (const name of names) {
-      const response: Response = await fetch(`${base}${SOUND_FILES[name]}`);
-      const arrayBuffer: ArrayBuffer = await response.arrayBuffer();
-      const audioBuffer: AudioBuffer =
-        await this.context.decodeAudioData(arrayBuffer);
-      this.buffers.set(name, audioBuffer);
+    const entries = await Promise.all(
+      names.map(async (name) => {
+        const response = await fetch(`${base}${SOUND_FILES[name]}`);
+        const arrayBuffer = await response.arrayBuffer();
+        const audioBuffer = await this.context.decodeAudioData(arrayBuffer);
+        return [name, audioBuffer] as const;
+      }),
+    );
+
+    for (const [name, buffer] of entries) {
+      this.buffers.set(name, buffer);
     }
   }
 
   public play(name: SoundName): void {
-    const buffer: AudioBuffer | undefined = this.buffers.get(name);
+    const buffer = this.buffers.get(name);
     if (!buffer) return;
-
     this.resume();
-
-    const source: AudioBufferSourceNode = this.context.createBufferSource();
-    const gain: GainNode = this.context.createGain();
-
-    source.buffer = buffer;
-    gain.gain.value = EFFECTS_VOLUME;
-
-    source.connect(gain);
-    gain.connect(this.context.destination);
-    source.start();
+    this.createSource(buffer, EFFECTS_VOLUME, false);
   }
 
   public playBackground(): void {
-    const buffer: AudioBuffer | undefined = this.buffers.get("background");
+    const buffer = this.buffers.get("background");
     if (!buffer || this.backgroundSource) return;
-
     this.resume();
-
-    const source: AudioBufferSourceNode = this.context.createBufferSource();
-    const gain: GainNode = this.context.createGain();
-
-    source.buffer = buffer;
-    source.loop = true;
-    gain.gain.value = BACKGROUND_VOLUME;
-
-    source.connect(gain);
-    gain.connect(this.context.destination);
-    source.start();
-
-    this.backgroundSource = source;
+    this.backgroundSource = this.createSource(buffer, BACKGROUND_VOLUME, true);
   }
 
   public stopBackground(): void {
@@ -83,9 +59,28 @@ export class SoundManager {
     this.backgroundSource = null;
   }
 
+  private createSource(
+    buffer: AudioBuffer,
+    volume: number,
+    loop: boolean,
+  ): AudioBufferSourceNode {
+    const source = this.context.createBufferSource();
+    const gain = this.context.createGain();
+
+    source.buffer = buffer;
+    source.loop = loop;
+    gain.gain.value = volume;
+
+    source.connect(gain);
+    gain.connect(this.context.destination);
+    source.start();
+
+    return source;
+  }
+
   private resume(): void {
     if (this.context.state === "suspended") {
-      this.context.resume();
+      void this.context.resume();
     }
   }
 }

@@ -20,7 +20,7 @@ export class WinField extends Container {
       text: "",
       style: {
         fontFamily: "PixelifySans-Bold",
-        fontSize: 60,
+        fontSize: 100,
         fill: 0xffd700,
         align: "center",
       },
