@@ -1,6 +1,7 @@
 import { Container, Text } from "pixi.js";
 import { BetField } from "./BetField";
 import { BET_VALUES, DEFAULT_BET_INDEX } from "../constants";
+import { SoundManager } from "../audio/SoundManager";
 
 const ARROW_STYLE = {
   fontFamily: "PixelifySans-Bold",
@@ -56,6 +57,7 @@ export class BetSelector extends Container {
   }
 
   private onDecrement = (): void => {
+    SoundManager.getInstance().play("button");
     if (this.betIndex > 0) {
       this.betIndex--;
       this.updateDisplay();
@@ -64,6 +66,7 @@ export class BetSelector extends Container {
   };
 
   private onIncrement = (): void => {
+    SoundManager.getInstance().play("button");
     if (this.betIndex < BET_VALUES.length - 1) {
       this.betIndex++;
       this.updateDisplay();
