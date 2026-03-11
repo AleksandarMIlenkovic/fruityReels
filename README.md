@@ -133,17 +133,3 @@ The animation stops automatically when the next spin starts.
 
 When 2 reels have stopped and a partial win is detected, the next reel displays a gold/cyan particle burst (`AnticipationEmitter`) and gets extra stop delay — building tension before the result is revealed.
 
----
-
-## Deployment
-
-The project deploys automatically to GitHub Pages via `.github/workflows/deploy.yml` on every push to `main`.
-
----
-
-## Code Style
-
-- All variables, parameters, and return types have explicit TypeScript types
-- `for` loops are used whenever the body has side effects (`addChild`, `push`)
-- All components use `anchor.set(0.5)` or `pivot` at center — GameScene positions them with flat `x`/`y` coordinates
-- No magic cascade math — changing one position constant moves only that element

@@ -60,7 +60,9 @@ export class GameScene extends Scene {
     this.soundManager = soundManager;
     this.gameContainer = new Container();
 
-    const mask = new Graphics().rect(0, 0, GAME_WIDTH, GAME_HEIGHT).fill(0xffffff);
+    const mask = new Graphics()
+      .rect(0, 0, GAME_WIDTH, GAME_HEIGHT)
+      .fill(0xffffff);
     this.gameContainer.addChild(mask);
     this.gameContainer.mask = mask;
 
