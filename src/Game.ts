@@ -1,6 +1,7 @@
 import { Application } from "pixi.js";
 import { Scene } from "./scenes/Scene";
 import { PreloaderScene } from "./scenes/PreloaderScene";
+import { StartScene } from "./scenes/StartScene";
 import { GameScene } from "./scenes/GameScene";
 
 export class Game {
@@ -24,6 +25,7 @@ export class Game {
     window.addEventListener("orientationchange", () => this.onResize());
 
     await this.switchScene(new PreloaderScene(this.app));
+    await this.switchScene(new StartScene(this.app));
     await this.switchScene(new GameScene(this.app));
   }
 

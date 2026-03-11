@@ -17,27 +17,27 @@ import { GAME_WIDTH, GAME_HEIGHT } from "../constants";
 // All positions in the 1280x720 virtual space.
 // Every value is a flat number — changing one moves only that element.
 // SparkleEmitter bounds (FRAME_*) must be kept in sync with REELS_* by hand.
-const REELS_X: number = 640;
+const REELS_X: number = 400;
 const REELS_Y: number = 360;
 
-const SPIN_BUTTON_X: number = 640;
-const SPIN_BUTTON_Y: number = 650;
+const SPIN_BUTTON_X: number = 400;
+const SPIN_BUTTON_Y: number = 725;
 
-const BET_SELECTOR_X: number = 380;
-const BET_SELECTOR_Y: number = 635;
+const BET_SELECTOR_X: number = 200;
+const BET_SELECTOR_Y: number = 725;
 
-const WIN_DISPLAY_X: number = 900;
-const WIN_DISPLAY_Y: number = 635;
+const WIN_DISPLAY_X: number = 600;
+const WIN_DISPLAY_Y: number = 725;
 
-const PAYTABLE_BUTTON_X: number = 900;
+const PAYTABLE_BUTTON_X: number = 600;
 const PAYTABLE_BUTTON_Y: number = 50;
 
-const OUTCOME_SELECTOR_X: number = 300;
-const OUTCOME_SELECTOR_Y: number = 0;
+const OUTCOME_SELECTOR_X: number = 150;
+const OUTCOME_SELECTOR_Y: number = 30;
 
-const FRAME_LEFT: number = 425;
+const FRAME_LEFT: number = 170;
 const FRAME_TOP: number = 165;
-const FRAME_RIGHT: number = 855;
+const FRAME_RIGHT: number = 620;
 const FRAME_BOTTOM: number = 555;
 
 export class GameScene extends Scene {

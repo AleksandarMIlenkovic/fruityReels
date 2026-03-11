@@ -19,7 +19,7 @@ export class BetField extends Container {
       text: "",
       style: {
         fontFamily: "PixelifySans-Bold",
-        fontSize: 32,
+        fontSize: 50,
         fill: 0xffd700,
         align: "center",
       },

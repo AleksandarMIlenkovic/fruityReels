@@ -52,14 +52,14 @@ export class SoundManager {
   public play(name: SoundName): void {
     const buffer = this.buffers.get(name);
     if (!buffer) return;
-    this.resume();
+    this.resumeContext();
     this.createSource(buffer, EFFECTS_VOLUME, false);
   }
 
   public playBackground(): void {
     const buffer = this.buffers.get("background");
     if (!buffer || this.backgroundSource) return;
-    this.resume();
+    this.resumeContext();
     this.backgroundSource = this.createSource(buffer, BACKGROUND_VOLUME, true);
   }
 
@@ -88,7 +88,7 @@ export class SoundManager {
     return source;
   }
 
-  private resume(): void {
+  public resumeContext(): void {
     if (this.context.state === "suspended") {
       void this.context.resume();
     }

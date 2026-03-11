@@ -7,7 +7,7 @@ export class PaytableButton extends Container {
     const bg: Graphics = new Graphics()
       .roundRect(0, 0, 40, 40, 8)
       .fill(0x2a0a4e)
-      .stroke({ color: 0xffd700, width: 1 });
+      .stroke({ color: 0xffd700, width: 5 });
     this.addChild(bg);
 
     const label: Text = new Text({

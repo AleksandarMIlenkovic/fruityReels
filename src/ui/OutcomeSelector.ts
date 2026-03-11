@@ -19,7 +19,7 @@ export class OutcomeSelector {
     this.select.style.border = "1px solid #ffd700";
     this.select.style.borderRadius = "4px";
     this.select.style.padding = "4px 8px";
-    this.select.style.fontSize = "14px";
+    this.select.style.fontSize = "24px";
     this.select.style.cursor = "pointer";
     document.body.appendChild(this.select);
   }

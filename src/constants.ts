@@ -11,8 +11,8 @@ export const SYMBOLS = [
 
 export type SymbolName = (typeof SYMBOLS)[number];
 
-export const GAME_WIDTH: number = 1280;
-export const GAME_HEIGHT: number = 720;
+export const GAME_WIDTH: number = 800;
+export const GAME_HEIGHT: number = 800;
 
 export const REEL_COUNT: number = 3;
 export const ROWS: number = 3;
