@@ -5,7 +5,6 @@ import { SoundManager } from "../audio/SoundManager";
 export class PreloaderScene extends Scene {
   private readonly app: Application;
   private loadingText!: Text;
-  public soundManager!: SoundManager;
 
   constructor(app: Application) {
     super();
@@ -26,8 +25,7 @@ export class PreloaderScene extends Scene {
 
     await this.loadAssets();
 
-    this.soundManager = new SoundManager();
-    await this.soundManager.load();
+    await SoundManager.getInstance().load();
   }
 
   public resize(screenWidth: number, screenHeight: number): void {

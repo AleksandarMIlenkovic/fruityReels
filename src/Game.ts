@@ -23,10 +23,8 @@ export class Game {
     this.app.renderer.on("resize", () => this.onResize());
     window.addEventListener("orientationchange", () => this.onResize());
 
-    const preloader = new PreloaderScene(this.app);
-    await this.switchScene(preloader);
-
-    await this.switchScene(new GameScene(this.app, preloader.soundManager));
+    await this.switchScene(new PreloaderScene(this.app));
+    await this.switchScene(new GameScene(this.app));
   }
 
   private async switchScene(scene: Scene): Promise<void> {

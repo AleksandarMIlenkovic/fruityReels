@@ -42,7 +42,6 @@ const FRAME_BOTTOM: number = 555;
 
 export class GameScene extends Scene {
   private readonly app: Application;
-  private readonly soundManager: SoundManager;
   private readonly gameContainer: Container;
   private reels!: Reels;
   private spinController!: SpinController;
@@ -54,10 +53,9 @@ export class GameScene extends Scene {
   private winDisplay!: WinDisplay;
   private outcomeSelector!: OutcomeSelector;
 
-  constructor(app: Application, soundManager: SoundManager) {
+  constructor(app: Application) {
     super();
     this.app = app;
-    this.soundManager = soundManager;
     this.gameContainer = new Container();
 
     const mask = new Graphics()
@@ -105,7 +103,7 @@ export class GameScene extends Scene {
     this.paytableButton.on("paytable", (): void => this.openPaytable());
     this.gameContainer.addChild(this.paytableButton);
 
-    this.soundManager.playBackground();
+    SoundManager.getInstance().playBackground();
 
     this.winAnimator = new WinAnimator(this.app, this.reels.getReels());
 
@@ -123,7 +121,7 @@ export class GameScene extends Scene {
       this.sparkleEmitter.stop();
       this.spinButton.setEnabled(false);
       this.winDisplay.showLoss();
-      this.soundManager.play("spin");
+      SoundManager.getInstance().play("spin");
     });
 
     this.spinController.on("spinEnd", (result: EvalResult): void => {
@@ -141,10 +139,10 @@ export class GameScene extends Scene {
         this.winDisplay.showAmount(amount);
         this.winAnimator.start(result.winLines);
         this.sparkleEmitter.start();
-        this.soundManager.play("win");
+        SoundManager.getInstance().play("win");
       } else {
         this.winDisplay.showLoss();
-        this.soundManager.play("lose");
+        SoundManager.getInstance().play("lose");
       }
     });
 
@@ -177,22 +175,22 @@ export class GameScene extends Scene {
   public override destroy(): void {
     this.winAnimator.stop();
     this.sparkleEmitter.stop();
-    this.soundManager.stopBackground();
+    SoundManager.getInstance().stopBackground();
     this.outcomeSelector.destroy();
     window.removeEventListener("keydown", this.onKeyDown);
     super.destroy();
   }
 
   private startSpin(): void {
-    this.soundManager.play("button");
+    SoundManager.getInstance().play("button");
     this.spinController.requestSpin(this.outcomeSelector.getSelectedOutcome());
   }
 
   private openPaytable(): void {
-    this.soundManager.play("button");
+    SoundManager.getInstance().play("button");
     const paytable: PaytableScene = new PaytableScene();
     paytable.on("close", (): void => {
-      this.soundManager.play("button");
+      SoundManager.getInstance().play("button");
       this.gameContainer.removeChild(paytable);
     });
     this.gameContainer.addChild(paytable);

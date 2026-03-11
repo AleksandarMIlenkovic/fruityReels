@@ -1,4 +1,5 @@
 import { Application, Container, Sprite, Texture } from "pixi.js";
+import { SoundManager } from "../audio/SoundManager";
 import {
   REEL_COUNT,
   ROWS,
@@ -87,6 +88,7 @@ export class Reels extends Container {
             const nextReel: Reel = this.reels[stoppedCount];
             if (WinEvaluator.hasPartialWin(results, stoppedCount)) {
               nextReel.startAnticipation();
+              SoundManager.getInstance().play("anticipation");
             }
           }
         });

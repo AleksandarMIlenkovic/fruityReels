@@ -4,6 +4,7 @@ const SOUND_FILES = {
   win: "assets/sounds/win_sound.mp3",
   lose: "assets/sounds/Loose.mp3",
   background: "assets/sounds/Background.mp3",
+  anticipation: "assets/sounds/anticipation.mp3",
 } as const;
 
 export type SoundName = keyof typeof SOUND_FILES;
@@ -12,11 +13,20 @@ const BACKGROUND_VOLUME: number = 0.3;
 const EFFECTS_VOLUME: number = 1.0;
 
 export class SoundManager {
+  private static instance: SoundManager;
+
+  public static getInstance(): SoundManager {
+    if (!SoundManager.instance) {
+      SoundManager.instance = new SoundManager();
+    }
+    return SoundManager.instance;
+  }
+
   private readonly context: AudioContext;
   private readonly buffers: Map<SoundName, AudioBuffer>;
   private backgroundSource: AudioBufferSourceNode | null = null;
 
-  constructor() {
+  private constructor() {
     this.context = new AudioContext();
     this.buffers = new Map();
   }
