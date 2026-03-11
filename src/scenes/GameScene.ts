@@ -188,16 +188,18 @@ export class GameScene extends Scene {
 
   private openPaytable(): void {
     SoundManager.getInstance().play("button");
+    this.spinButton.setEnabled(false);
     const paytable: PaytableScene = new PaytableScene();
     paytable.on("close", (): void => {
       SoundManager.getInstance().play("button");
       this.gameContainer.removeChild(paytable);
+      this.spinButton.setEnabled(true);
     });
     this.gameContainer.addChild(paytable);
   }
 
   private onKeyDown = (e: KeyboardEvent): void => {
-    if (e.key === "w" || e.key === "W") {
+    if (e.key === " ") {
       this.startSpin();
     }
   };
