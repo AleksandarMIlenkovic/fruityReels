@@ -20,27 +20,26 @@ export class StartScene extends Scene {
       style: { fill: 0xffd700, fontSize: 64, fontFamily: "PixelifySans-Bold" },
     });
     title.anchor.set(0.5);
-    title.y = -80;
+    title.y = 0;
     this.centerContainer.addChild(title);
 
     const button = new Container();
     button.eventMode = "static";
     button.cursor = "pointer";
 
-    const bg = new Graphics()
-      .roundRect(-120, -40, 240, 80, 12)
-      .fill(0xffd700);
+    const bg = new Graphics().roundRect(-120, 120, 240, 80, 12).fill(0xffd700);
     button.addChild(bg);
 
     const buttonText = new Text({
       text: "PLAY",
       style: { fill: 0x1a0a2e, fontSize: 36, fontFamily: "PixelifySans-Bold" },
     });
+    buttonText.y = 160;
     buttonText.anchor.set(0.5);
     button.addChild(buttonText);
 
-    button.on("pointerover", () => bg.tint = 0xffee88);
-    button.on("pointerout", () => bg.tint = 0xffffff);
+    button.on("pointerover", () => (bg.tint = 0xffee88));
+    button.on("pointerout", () => (bg.tint = 0xffffff));
 
     this.centerContainer.addChild(button);
     this.centerContainer.position.set(
